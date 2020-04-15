@@ -7,4 +7,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'mySecondApp';
+  loadedFeature = 'recipe'; // the same name i wrote in header component when I call OnSelect
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+  onNavigate(feature:string){
+    this.loadedFeature = feature;
+
+  }
 }

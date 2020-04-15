@@ -1,0 +1,10 @@
+<a href="#" class="list-group-item clearfix" (click)="onSelected()" > <!-- we use ngFor to alter the dom and loop all our recipes, the structure is
+let name_you_want of name_in_your_typescript.ts-->
+    <div class="pull-left">
+        <p class="list-group-item-heading"> <b> Name: </b>{{ recipe.name}}</p> <!--once we use ngfor we can use recipe in our template-->
+        <p class="list-group-item-text"><b> Description: </b>{{recipe.description}} </p>
+    </div>
+    <span class="pull-right">
+        <img src="{{recipe.imagePath}}"  alt="{{recipe.name}}" class="img-responsive" style="max-height: 50px;"> <!--Here also you can use binding [src]="recipe.imagePath"-->
+    </span>
+</a>
