@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-xs-12">
-        <button class="btn btn-success">New Recipe</button>
+        <button class="btn btn-success" (click)="onNewRecipe()">New Recipe</button>
     </div>
 </div>
 <hr>
@@ -20,6 +20,9 @@
         <app-recipe-item></app-recipe-item> We want to look through all my items and use them to display my recipes
      
     <app-recipe-item *ngFor="let recipeEl of recipes" [recipe]="recipeEl" (recipeSelected)="onRecipeselected(recipeEl)"></app-recipe-item>  [recipe] property in the recipe item component (see recipe-item.ts it is the name next to the input) -->
-    <app-recipe-item *ngFor="let recipeEl of recipes" [recipe]="recipeEl" ></app-recipe-item> <!--with the services we remove the eevent-->
+    <app-recipe-item *ngFor="let recipeEl of recipes; let i=index" 
+    [recipe]="recipeEl" [index]="i"></app-recipe-item> <!--with the services we remove the eevent
+    we ge tthe index of the recipe in our array of recipes-->
+
     </div> <!--we need to implement onRecipeselected in recipe list component. Properties in brackets must be in recipe-list-item.ts. I believe if you have input [] output ()-->
 </div>

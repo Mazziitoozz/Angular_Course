@@ -1,10 +1,13 @@
 import { Recipe } from './recipe.model';
-import { EventEmitter } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Ingredient } from '../shared/ingredient.model';
+import { ShoppingListService } from '../shopping-list/shopping-list.service';
+import { Subject } from 'rxjs';
 
+@Injectable()   //useful to inject a service into a service
 export class RecipeService{
+    recipesChanged = new Subject<Recipe[]>();
 
-    recipeSelected = new EventEmitter<Recipe>()
     private recipes: Recipe[] = [ //The only thing we can storage in this porperty is an array of Recipes -->Recipe[] type of data=array, you can write newt to your model the kind of data
       new Recipe('Grilled Steak ',
       'Delicious steak in its own sauce',
@@ -20,7 +23,30 @@ export class RecipeService{
         new Ingredient('Onions',1,'https://freshpoint.com/wp-content/uploads/commodity-yellow-onion.jpg'),
       ]) 
   ]; 
+  constructor(private slService: ShoppingListService){}//now wecan use this service
+  
   getRecipes(){
       return this.recipes.slice(); // get a copy of our recipes
+  }
+  addIngredientsToShoppingList(ingredients: Ingredient[]){
+    this.slService.addIngredients(ingredients);
+  }
+  getRecipe(id:number){ // get the recipe through the index
+    return this.recipes[id];
+
+  }
+  addRecipe(recipe:Recipe){
+    this.recipes.push(recipe);
+    this.recipesChanged.next(this.recipes.slice()) // we need to use this approach, the same than in shopping list due to with slice we get a copy of our elements
+
+  }
+
+  updateRecipe(index: number,newRecipe:Recipe){
+    this.recipes[index] = newRecipe;
+    this.recipesChanged.next(this.recipes.slice())
+  }
+  deleteRecipe(index:number){
+    this.recipes.splice(index,1);
+    this.recipesChanged.next(this.recipes.slice());
   }
 }

@@ -1,10 +1,13 @@
-<app-header (featureSelected)="onNavigate($event)"></app-header> <!--featureSelected comes from child component(header)
+<app-header ></app-header> <!--featureSelected comes from child component(header)
 You also can pass the data you ar expecting plus $event. onNavigate('data-Iwant',$event)-->
 <div class="container">
   <div class="row">
     <div class="col-md-12">
+      <router-outlet></router-outlet>
+    <!-- 
+      Without using routing
     <app-recipes *ngIf="loadedFeature === 'recipe'"></app-recipes>
-    <app-shopping-list *ngIf="loadedFeature !== 'recipe'"></app-shopping-list> <!--we need to put exactly the same name than in header component.html 
+    <app-shopping-list *ngIf="loadedFeature !== 'recipe'"></app-shopping-list> we need to put exactly the same name than in header component.html  
       because of the function in the header,ts will pass this argument to the parent, app.component-->
     </div>
   </div>

@@ -4,7 +4,8 @@
       <app-shopping-edit ></app-shopping-edit>
       <hr>
      <ul class="list-group">
-        <a href="#" class="list-group-item clearfix" style="cursor: pointer" *ngFor="let ingredient of ingredients">
+        <a  class="list-group-item clearfix" style="cursor: pointer" *ngFor="let ingredient of ingredients; let i=index"
+         (click)="onEditItem(i)">
           <div class="pull-left">
             <p class="list-group-item-heading"> <b> Name: </b>{{ingredient.name}} ( {{ingredient.amount}} )</p> <!--once we use ngfor we can use recipe in our template-->
           </div>
